@@ -19,6 +19,8 @@ async function submitGym (req,res) {
     })
 
     try {
+
+        
         await newgym.save()
         Gym.find(function (err,gyms) {
           res.send(gyms) //expected: ARRAY of Gym documents 
@@ -44,9 +46,9 @@ async function getPrs (req,res) {
 
 async function submitPr(req,res) {
     const gym = req.params.gymName
-    const {creator,lift,weight,reps} = req.body
+    const {creator,lift,weight,reps,url} = req.body
     const updatePrs = {
-        $push: {prs: {creator,lift,weight,reps}}
+        $push: {prs: {creator,lift,weight,reps,url}}
     }
 
     try {
@@ -59,5 +61,12 @@ async function submitPr(req,res) {
         console.log(error)
     }
 }
+
+//video controllers
+
+//POST route: to add video in db
+//GET route with params: {videoURL: String} , searches bucket
+// for video file with filename = videoURL, runs the downloadstream
+// to the response.
 
 export {getGyms,submitGym,getPrs,submitPr}

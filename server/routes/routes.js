@@ -9,8 +9,10 @@ const router = express.Router()
 router.get("/",getGyms)
 router.post("/",submitGym)
 
-// gym/pr routes
+//pr routes
 router.get("/:gymName",getPrs)
 router.patch("/:gymName",submitPr)
+
+//video routes
 
 export default router
